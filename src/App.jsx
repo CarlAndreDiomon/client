@@ -8,6 +8,8 @@ import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import SideBar from './components/SideBar';
 import UploadPage from './pages/UploadPage';
+import DownloadPage from './pages/DownloadPage'; // Import DownloadPage
+import LoginTeacherPage from './pages/LoginTeacherPage'; // Import LoginTeacherPage
 
 function App() {
   const { authUser, checkAuth, isCheckingAuth, logout } = useAuthStore();
@@ -41,6 +43,12 @@ function App() {
           <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
           <Route path="/signup" element={authUser ? <HomePage /> : <RegisterPage />} />
           <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
+          {/* Add route for LoginTeacherPage */}
+          <Route path="/login-teacher" element={!authUser ? <LoginTeacherPage /> : <Navigate to="/" />} />
+          {/* Add route for DownloadPage */}
+          <Route path="/download" element={authUser ? <DownloadPage /> : <Navigate to="/login" />} />
+          {/* Add route for UploadPage - ensure it's protected if needed */}
+          <Route path="/upload" element={authUser && authUser.Role === 'teacher' ? <UploadPage /> : <Navigate to="/" />} />
         </Routes>
       </div>
 

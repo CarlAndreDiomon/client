@@ -1,4 +1,4 @@
-import { Menu, Power, Home, BookOpen, UserCircle, Upload } from 'lucide-react'; // Added Upload icon
+import { Menu, Power, Home, BookOpen, UserCircle, Upload, Download } from 'lucide-react'; // Added Download icon
 import { useAuthStore } from '../store/useAuthStore';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Added Link and useNavigate
@@ -20,9 +20,11 @@ const SideBar = () => {
   };
 
   const menuItems = [
-    { name: 'Home', icon: Home, href: '/' }, // Changed href to /
-    { name: 'Modules', icon: BookOpen, href: '#' },
+    { name: 'Home', icon: Home, href: '/' },
+    { name: 'Modules', icon: BookOpen, href: '#' }, // Assuming this might be the download page or a page listing modules
     { name: 'Profile', icon: UserCircle, href: '#' },
+    // Added Download link item
+    { name: 'Download', icon: Download, href: '/download' }, 
   ];
 
   return (
@@ -73,9 +75,9 @@ const SideBar = () => {
           </h2>
         )}
         {menuItems.map((item) => (
-          <Link // Changed <a> to <Link>
+          <Link 
             key={item.name}
-            to={item.href} // Changed href to to
+            to={item.href} 
             className={`relative flex items-center p-2.5 rounded-md hover:bg-white/10 transition-colors group ${!showMenu ? 'justify-center' : 'space-x-3'}`}
             title={item.name}
           >
@@ -85,7 +87,7 @@ const SideBar = () => {
                 {item.name}
               </span>
             )}
-          </Link> // Changed <a> to <Link>
+          </Link> 
         ))}
         {/* Upload Link */}
         <button // Changed to button for onClick handler
